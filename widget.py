@@ -12,12 +12,12 @@ class App(QMainWindow):
             self.height = 250
             self.setWindowTitle("WidgetApp")
             self.setFixedSize(self.width, self.height)
-
+            # change window starting pos to btm left
             qtRectangle = self.frameGeometry()
             centerPoint = QDesktopWidget().availableGeometry().bottomRight()
             qtRectangle.moveBottomRight(centerPoint)
             self.move(qtRectangle.topLeft())
-
+            # force window to be abover any other objects (even taskbar or other windows being moved "above" this)
             self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
 
 # main process
