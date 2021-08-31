@@ -13,6 +13,11 @@ class App(QMainWindow):
             self.setWindowTitle("WidgetApp")
             self.setFixedSize(self.width, self.height)
 
+            qtRectangle = self.frameGeometry()
+            centerPoint = QDesktopWidget().availableGeometry().bottomRight()
+            qtRectangle.moveBottomRight(centerPoint)
+            self.move(qtRectangle.topLeft())
+
 # main process
 if __name__ == '__main__':
     app = QApplication(sys.argv)
