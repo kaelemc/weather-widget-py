@@ -28,10 +28,26 @@ class App(QMainWindow):
             # but has bg for ease of text readability
             self.setAttribute(Qt.WA_TranslucentBackground, True)
 
-            # create window layout
-            self.QFrameObj = QFrame(self)
-            self.QFrameObj.resize(width, height)
-            self.QFrameObj.setStyleSheet("background-color: rgba(0, 0, 0, 60)")
+            # main window layout
+            self._layout = QHBoxLayout()
+
+            # create QFrame "container" for translucent effect
+            QFObj = QFrame(self)
+            QFObj.resize(width, height)
+            QFObj.setStyleSheet("background-color: rgba(0, 0, 0, 0.2);") # set transparency
+            # create a sublayout to apply to qframe
+            QFLayout = QHBoxLayout()
+            # create central widget for sublayout
+            QFWidget = QWidget()
+            QFWidget.setStyleSheet("background: transparent")   # add transparent rule so that we don't get overlapping sub-backgrounds
+            QFWidget.setLayout(self._layout)    # appy main layout to central widget which then applies to QFLayout sublayout which applies to qframe container
+            
+            # add the central widget to the sublayout
+            QFLayout.addWidget(QFWidget)    
+
+            # set the sublayout to the qframe layout
+            QFObj.setLayout(QFLayout)   
+
 
 
 
