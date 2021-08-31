@@ -22,6 +22,9 @@ class App(QMainWindow):
             #   2. keep window at very top of any other windows always (even above taskbar)
             #   3. make window frameless so can't be moved
             self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint)
+            # make window semi transparent so we can see under it still
+            # but has bg for ease of text readability
+            self.setWindowOpacity(0.05)
 
 # main process
 if __name__ == '__main__':
