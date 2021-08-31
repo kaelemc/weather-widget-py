@@ -17,8 +17,11 @@ class App(QMainWindow):
             centerPoint = QDesktopWidget().availableGeometry().bottomRight()
             qtRectangle.moveBottomRight(centerPoint)
             self.move(qtRectangle.topLeft())
-            # force window to be abover any other objects (even taskbar or other windows being moved "above" this)
-            self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
+            # set window flags (there are multiple)
+            #   1. init the window flags
+            #   2. keep window at very top of any other windows always (even above taskbar)
+            #   3. make window frameless so can't be moved
+            self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint)
 
 # main process
 if __name__ == '__main__':
