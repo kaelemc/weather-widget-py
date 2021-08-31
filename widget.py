@@ -18,6 +18,8 @@ class App(QMainWindow):
             qtRectangle.moveBottomRight(centerPoint)
             self.move(qtRectangle.topLeft())
 
+            self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
+
 # main process
 if __name__ == '__main__':
     app = QApplication(sys.argv)
