@@ -5,13 +5,14 @@ from PyQt5.QtWidgets import *
 class App(QMainWindow):
 
         # class constructor
+        # basically just initialzing the main window
         def __init__(self) -> None:
             super().__init__()
             # window settings
-            self.width = 600
-            self.height = 250
+            width = 600
+            height = 250
             self.setWindowTitle("WidgetApp")
-            self.setFixedSize(self.width, self.height)
+            self.setFixedSize(width, height)
             # change window starting pos to btm left
             qtRectangle = self.frameGeometry()
             centerPoint = QDesktopWidget().availableGeometry().bottomRight()
@@ -25,6 +26,9 @@ class App(QMainWindow):
             # make window semi transparent so we can see under it still
             # but has bg for ease of text readability
             self.setWindowOpacity(0.05)
+        
+        def testText(self) -> None:
+
 
 # main process
 if __name__ == '__main__':
