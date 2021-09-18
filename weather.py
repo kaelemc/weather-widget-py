@@ -2,15 +2,24 @@ import requests
 import json
 import geocoder
 
-# api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+# grab config from json file for security when commiting and ease of config
+config_file = open("config.json", "r")
 
-api_key = "" # api key here
+config_dict = json.loads(config_file.read())
+# close file
+config_file.close()
+
+# set true to show debugging hints in console
+DEBUG_FLAG = config_dict["debug"]
+
+# api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+api_key = config_dict["api_key"]
 base_url = "http://api.openweathermap.org/data/2.5/"
 
 def callWeatherAPI(latitude, longitude):
     api_url = "{url}weather?lat={_lat}&lon={_lon}&appid={_api_key}&units=metric".format(url=base_url, _lat=latitude, _lon=longitude, _api_key=api_key)
     
-    print(api_url)  # so I can open the link in my browser and analyze the HTTP response headers
+    if DEBUG_FLAG: print(api_url)  # so I can open the link in my browser and analyze the HTTP response headers
 
     response = requests.get(api_url)
 
@@ -22,10 +31,10 @@ def callWeatherAPI(latitude, longitude):
 
 def getWeather():
     location = geocoder.ip('me')
-    print(location.latlng)
-    weatherDict = callWeatherAPI(location.latlng[0], location.latlng[1])
+    if DEBUG_FLAG: print(location.latlng)
+    weather_dict = callWeatherAPI(location.latlng[0], location.latlng[1])
 
-    if weatherDict is not None:
-        return [ weatherDict['name'], weatherDict['weather'][0]['description'], weatherDict['main']['temp'], weatherDict['main']['humidity']] 
+    if weather_dict is not None:
+        return [ weather_dict['name'], weather_dict['weather'][0]['description'], weather_dict['main']['temp'], weather_dict['main']['humidity'], weather_dict['weather'][0]['icon']] 
     else:
         return None
