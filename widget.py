@@ -123,13 +123,16 @@ class App(QMainWindow):
 
             if DEBUG_FLAG: print(self.pixmaps)
 
-            if pixmap is not None:
-                self.weatherIcon.setPixmap(pixmap)
-            elif iconCode.startswith("03"):
-                self.weatherIcon.setPixmap(self.pixmaps["03"])
-            elif iconCode.startswith("50"):
-                self.weatherIcon.setPixmap(self.pixmaps["50"])
-            else:
+            try:
+                if pixmap is not None:
+                    self.weatherIcon.setPixmap(pixmap)
+                elif iconCode.startswith("03"):
+                    self.weatherIcon.setPixmap(self.pixmaps["03.png"])
+                elif iconCode.startswith("50"):
+                    self.weatherIcon.setPixmap(self.pixmaps["50.png"])
+                else:
+                    self.weatherIcon.setText("No icon available")
+            except:
                 self.weatherIcon.setText("No icon available")
         
         # setup the QTimer for timed event calling ( in this case updateWeather())
