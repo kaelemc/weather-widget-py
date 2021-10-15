@@ -147,7 +147,12 @@ class App(QMainWindow):
             if weather is not None:
                 self.updateLabels(weather[0], weather[1].capitalize(), weather[2], weather[3], weather[4])
 
-
+        def hideEvent(self, a0: QtGui.QHideEvent) -> None:
+            if self.isMinimized():
+                self.showNormal()
+            else:
+                pass
+            return super().hideEvent(a0)
 # main process
 if __name__ == '__main__':
     app = QApplication(sys.argv)
