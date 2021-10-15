@@ -146,6 +146,7 @@ class App(QMainWindow):
 
             if weather is not None:
                 self.updateLabels(weather[0], weather[1].capitalize(), weather[2], weather[3], weather[4])
+                
 
 
 # main process
